@@ -46,7 +46,7 @@ public class OkhttpOutboundHandler {
     }
 
     public void handle(final FullHttpRequest fullHttpRequest, final ChannelHandlerContext ctx) {
-        final String url = this.backendUrl + fullHttpRequest.uri();
+        final String url = fullHttpRequest.uri();
         proxyService.submit(() -> fetchGet(fullHttpRequest, ctx, url));
     }
 
