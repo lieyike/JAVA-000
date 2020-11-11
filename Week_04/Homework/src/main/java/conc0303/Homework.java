@@ -20,7 +20,7 @@ public class Homework {
         // 异步执行 下面方法
         //        int result = sum(); //这是得到的返回值
 
-        //Way 1
+        //Way 1 thread join
 //        AtomicInteger atomicInteger = new AtomicInteger();
 //        Thread thread = new Thread(new Task1(atomicInteger));
 //        thread.start();
@@ -29,7 +29,7 @@ public class Homework {
 //        System.out.println("异步计算结果为："+result);
 //        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
 
-        //Way 2
+        //Way 2 countDownLatch
 //        CountDownLatch countDownLatch = new CountDownLatch(1);
 //        AtomicInteger atomicInteger = new AtomicInteger();
 //        Task2 task = new Task2(countDownLatch, atomicInteger);
@@ -41,7 +41,7 @@ public class Homework {
 //        System.out.println("异步计算结果为："+result);
 //        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
 
-        //Way 3
+        //Way 3 Future
 //        Callable<Integer> callable = new Callable<Integer>() {
 //            public Integer call() throws Exception {
 //                return sum();
@@ -54,7 +54,7 @@ public class Homework {
 //        System.out.println("异步计算结果为："+result);
 //        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
 
-        //Way 4
+        //Way 4 FutureTask
 //        FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
 //            public Integer call() throws Exception {
 //                return sum();
@@ -67,12 +67,12 @@ public class Homework {
 //        System.out.println("异步计算结果为："+result);
 //        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
 
-        //Way 5
+        //Way 5 CompletableFuture
 //        int result = CompletableFuture.supplyAsync(Homework::sum).join();
 //        System.out.println("异步计算结果为："+result);
 //        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
 
-        //Way 6 不是在主线程拿到result而是在回调中拿到
+        //Way 6 cyclicBarrier 不是在主线程拿到result而是在回调中拿到
 //        AtomicInteger atomicInteger = new AtomicInteger();
 //        CyclicBarrier cyclicBarrier = new CyclicBarrier(1, new Runnable() {
 //            @Override
@@ -98,7 +98,7 @@ public class Homework {
 //        });
 //        thread.start();
 
-        //Way 6
+        //Way 7 LockSupport
 //        Thread main = Thread.currentThread();
 //        AtomicInteger atomicInteger = new AtomicInteger();
 //        Thread thread = new Thread(new Runnable() {
@@ -115,7 +115,7 @@ public class Homework {
 //        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
 
 
-        //Way 7
+        //Way 8 wait and notifyAll
 //        Homework homework = new Homework();
 //        AtomicInteger atomicInteger = new AtomicInteger();
 //        Thread thread = new Thread(new Runnable() {
