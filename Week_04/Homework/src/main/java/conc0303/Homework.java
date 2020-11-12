@@ -1,6 +1,7 @@
 package conc0303;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.LockSupport;
 
@@ -127,10 +128,26 @@ public class Homework {
 //        thread.start();
 //        homework.printResult(atomicInteger, start);
 
+        //Way 9
+        Thread main = Thread.currentThread();
+        AtomicInteger atomicInteger = new AtomicInteger();
+        AtomicBoolean flag = new AtomicBoolean(true);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                atomicInteger.set(sum());
+                flag.set(false);
+            }
+        });
+        thread.start();
 
-        // 确保  拿到result 并输出
+        while (flag.get()) {
+            Thread.sleep(50);
+        }
+        int result = atomicInteger.get();
+        System.out.println("异步计算结果为：" + result);
+        System.out.println("使用时间：" + (System.currentTimeMillis() - start) + " ms");
 
-        // 然后退出main线程
     }
 
     private synchronized void printResult(AtomicInteger atomicInteger, long start) throws InterruptedException {
