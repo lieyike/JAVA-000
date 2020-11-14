@@ -129,24 +129,43 @@ public class Homework {
 //        homework.printResult(atomicInteger, start);
 
         //Way 9
-        Thread main = Thread.currentThread();
+//        Thread main = Thread.currentThread();
+//        AtomicInteger atomicInteger = new AtomicInteger();
+//        AtomicBoolean flag = new AtomicBoolean(true);
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                atomicInteger.set(sum());
+//                flag.set(false);
+//            }
+//        });
+//        thread.start();
+//
+//        while (flag.get()) {
+//            Thread.sleep(50);
+//        }
+//        int result = atomicInteger.get();
+//        System.out.println("异步计算结果为：" + result);
+//        System.out.println("使用时间：" + (System.currentTimeMillis() - start) + " ms");
+
+        //Way 10 semaphore
+        Semaphore semaphore = new Semaphore(1, true);
+
         AtomicInteger atomicInteger = new AtomicInteger();
-        AtomicBoolean flag = new AtomicBoolean(true);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 atomicInteger.set(sum());
-                flag.set(false);
+                semaphore.release();
             }
         });
+        semaphore.acquire(1);
         thread.start();
 
-        while (flag.get()) {
-            Thread.sleep(50);
-        }
+        semaphore.acquire(1);
         int result = atomicInteger.get();
-        System.out.println("异步计算结果为：" + result);
-        System.out.println("使用时间：" + (System.currentTimeMillis() - start) + " ms");
+        System.out.println("异步计算结果为："+result);
+        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
 
     }
 
