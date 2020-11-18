@@ -9,6 +9,10 @@ import javax.annotation.Resource;
 
 @Data
 public class School implements ISchool {
+
+
+
+    private String name;
     
     // Resource 
     @Autowired(required = true) //primary
@@ -16,12 +20,19 @@ public class School implements ISchool {
     
     @Resource(name = "student100")
     Student student100;
-    
+
+
+    public School(String name) {
+        this.name = name;
+    }
+
     @Override
     public void ding(){
     
         System.out.println("Class1 have " + this.class1.getStudents().size() + " students and one is " + this.student100);
         
     }
+
+
     
 }

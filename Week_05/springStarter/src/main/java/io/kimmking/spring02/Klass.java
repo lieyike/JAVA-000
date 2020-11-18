@@ -6,16 +6,21 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Klass { 
-    
+public class Klass {
+
     List<Student> students;
+
+    public Klass(List<Student> students) {
+        this.students = students;
+    }
 
     public List<Student> getStudents() {
         return students;
     }
-    
-    public void dong(){
+
+    public void dong() {
         System.out.println(this.getStudents());
     }
-    
+
+
 }

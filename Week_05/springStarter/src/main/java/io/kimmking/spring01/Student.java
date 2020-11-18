@@ -10,8 +10,6 @@ import java.io.Serializable;
 
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 
 public class Student implements Serializable {
