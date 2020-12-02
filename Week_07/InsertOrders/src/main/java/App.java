@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class App {
 
-    private static String jdbcUrl = "jdbc:mysql://127.0.0.1:3307/GoodsTransaction?serverTimezone=UTC";
+    private static String jdbcUrl = "jdbc:mysql://127.0.0.1:3307/GoodsTransaction?serverTimezone=UTC&rewriteBatchedStatements=true";
     private static String user = "root";
     private static String password = "123456";
 //    private static int times = 10;
@@ -94,7 +94,8 @@ public class App {
         }
 
     }
-    // 1000 1,984秒 100万 33分钟20秒
+    // beofre add rewriteBatchedStatements=true 1000 1,984 ms  100万 about 33分钟20秒
+    // after add rewriteBatchedStatements=true 1000 121 ms,  100万 40,930 ms
     public static void ways2(Connection conn) throws Exception {
         conn.setAutoCommit(false);
         String sql1 = "INSERT INTO GoodsTransaction.Order (`order_id`, `User_user_id`, `address`, `photonumber`, `status`, `total_price`) VALUES (?, ?, ?, ?, 'done', ?)";
@@ -127,9 +128,10 @@ public class App {
             }
 
         }
+        conn.setAutoCommit(true);
         int[] resultNum = preparedStatement1.executeBatch();
         int[] resultNum2 = preparedStatement2.executeBatch();
-        System.out.println("Orders resultNum " + resultNum);
+//        System.out.println("Orders resultNum " + resultNum);
     }
 
     public static Orders getData(int id) {
