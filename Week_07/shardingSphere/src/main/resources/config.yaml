@@ -1,0 +1,5 @@
+dataSource:
+  driverClassName: com.mysql.jdbc.Driver
+  jdbcUrl: jdbc:mysql://127.0.0.1:3307/GoodsTransaction?serverTimezone=UTC
+  username: root
+  password: 123456
