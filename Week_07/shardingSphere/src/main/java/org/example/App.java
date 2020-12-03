@@ -1,6 +1,6 @@
 package org.example;
 
-import org.apache.shardingsphere.driver.api.yaml.YamlShardingSphereDataSourceFactory;
+import org.apache.shardingsphere.shardingjdbc.api.yaml.YamlMasterSlaveDataSourceFactory;
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -13,7 +13,8 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         File yamlFile = new File(ClassLoader.getSystemResource("config.yaml").getFile());
-        DataSource dataSource =  YamlShardingSphereDataSourceFactory.createDataSource(yamlFile);
+
+        DataSource dataSource =  YamlMasterSlaveDataSourceFactory.createDataSource(yamlFile);
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select * from GoodsTransaction.Goods");
 
@@ -24,5 +25,8 @@ public class App {
             System.out.println("id: " + id + " name: " + name );
         }
 
+        preparedStatement = connection.prepareStatement("insert into Goods values (11, 'test', 15.00,  200, current_timestamp(), current_timestamp());");
+        int result = preparedStatement.executeUpdate();
+        System.out.println("result: " + result );
     }
 }

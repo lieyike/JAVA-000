@@ -4,16 +4,16 @@ dataSources:
     jdbcUrl: jdbc:mysql://127.0.0.1:3307/GoodsTransaction?serverTimezone=UTC
     username: root
     password: 123456
-  ds_slave_0: !!com.zaxxer.hikari.HikariDataSource
+  ds_slave: !!com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3308/GoodsTransaction?serverTimezone=UTC
     username: root
     password: 123456
-#
-#masterSlaveRule:
-#  name: ds_ms
-#  masterDataSourceName: ds_master
-#  slaveDataSourceNames: [ds_slave_0, ds_slave_1]
-#
+
+masterSlaveRule:
+  name: ds_ms
+  masterDataSourceName: ds_master
+  slaveDataSourceNames: [ds_slave]
+
 props:
   sql.show: false
