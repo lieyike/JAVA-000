@@ -103,7 +103,7 @@ rules:
 - !SHARDING
   tables:
     t_order:
-      actualDataNodes: ds_${0..1}.Order${0..2}
+      actualDataNodes: ds_${0..1}.Order${0..15}
       tableStrategy:
         standard:
           shardingColumn: order_id
@@ -126,7 +126,7 @@ rules:
     t_order_inline:
       type: INLINE
       props:
-        algorithm-expression: Order${order_id % 3}
+        algorithm-expression: Order${order_id % 16}
 
   keyGenerators:
     snowflake:
