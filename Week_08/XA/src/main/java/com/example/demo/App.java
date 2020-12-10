@@ -23,14 +23,14 @@ public class App {
 
         Connection conn = dataSource.getConnection();
 
-        String sql = "insert into goods values (?, ?);";
+        String sql = "insert into t_order (user_id, order_id) VALUES (?, ?);";
 
         System.out.println("First XA insert successful");
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             conn.setAutoCommit(false);
             for (int i = 1; i < 11; i++) {
-                statement.setInt(1, i);
-                statement.setString(2, "Name " + i);
+                statement.setLong(1, i);
+                statement.setLong(2, i);
                 statement.executeUpdate();
             }
             conn.commit();
@@ -44,8 +44,8 @@ public class App {
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             conn.setAutoCommit(false);
             for (int i = 1; i < 11; i++) {
-                statement.setLong(1, i+5);
-                statement.setString(2, "Name " + i);
+                statement.setLong(1, i + 5);
+                statement.setLong(2, i + 5);
                 statement.executeUpdate();
             }
             conn.commit();
@@ -62,7 +62,7 @@ public class App {
     public static void cleanData(DataSource dataSource) {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            statement.execute("delete from goods");
+            statement.execute("delete from t_order;");
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
