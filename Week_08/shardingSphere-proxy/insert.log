@@ -1,0 +1,6 @@
+[INFO ] 00:54:03.779 [ShardingSphere-Command-11] ShardingSphere-SQL - Logic SQL: SHOW INDEX FROM `sharding_order`.`t_order`
+[INFO ] 00:54:03.780 [ShardingSphere-Command-11] ShardingSphere-SQL - SQLStatement: MySQLShowIndexStatement(table=SimpleTableSegment(tableName=TableNameSegment(startIndex=16, stopIndex=41, identifier=IdentifierValue(value=t_order, quoteCharacter=BACK_QUOTE)), owner=Optional[org.apache.shardingsphere.sql.parser.sql.common.segment.generic.OwnerSegment@3c3205f], alias=Optional.empty), schema=Optional.empty)
+[INFO ] 00:54:03.780 [ShardingSphere-Command-11] ShardingSphere-SQL - Actual SQL: ds_0 ::: SHOW INDEX FROM `order0`
+[INFO ] 00:56:23.112 [ShardingSphere-Command-15] ShardingSphere-SQL - Logic SQL: insert into sharding_order.t_order_item  values (2, 1, 1, 2,'5.00')
+[INFO ] 00:56:23.112 [ShardingSphere-Command-15] ShardingSphere-SQL - SQLStatement: MySQLInsertStatement(setAssignment=Optional.empty, onDuplicateKeyColumns=Optional.empty)
+[INFO ] 00:56:23.112 [ShardingSphere-Command-15] ShardingSphere-SQL - Actual SQL: ds_1 ::: insert into order_details1  values (2, 1, 1, 2, '5.00')

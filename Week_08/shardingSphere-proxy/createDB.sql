@@ -1,75 +1,200 @@
+
+
 USE `GoodsTransaction`;
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order0`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order0` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order1`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order1` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order2`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order2` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order3`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order3` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order4`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order4` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order5`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order5` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order6`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order6` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order7`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order7` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order8`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order8` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order9`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order9` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order10`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order10` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order11`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order11` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order12`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order12` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order13`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order13` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order14`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order14` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
-DROP TABLE IF EXISTS `GoodsTransaction`.`Order15`;
-CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`Order15` (
-`order_id` INT NOT NULL,
-`user_name` VARCHAR(45) NOT NULL);
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order0` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
 
-  
-  
-use sharding_order;
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order1` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order2` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order3` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order4` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order5` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order6` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order7` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order8` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order9` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order10` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order11` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order12` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order13` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order14` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order15` (
+  `order_id` bigint,
+  `user_id` INT NOT NULL,
+  `total_price` DECIMAL(6,2) NULL);
+
+
+USE `GoodsTransaction`;
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details0` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details1` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details2` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details3` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details4` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details5` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details6` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details7` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details8` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details9` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details10` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details11` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details12` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details13` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details14` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+CREATE TABLE IF NOT EXISTS `GoodsTransaction`.`order_details15` (
+  `order_item_id` bigint,
+  `goods_id` INT NOT NULL,
+  `order_id` bigint,
+  `goods_quntity` INT NOT NULL,
+  `single_order_price` DECIMAL(6,2) NULL);
+
+
+
 show tables;
-
-
-select * from sharding_order.t_order;
-
-insert into sharding_order.t_order  values (2,'Ben')
