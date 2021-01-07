@@ -104,6 +104,72 @@ OK
 
 分配槽
 
+.\redis-cli.exe -p 7000 cluster addslots {0..5641}
+.\redis-cli.exe -p 7001 cluster addslots {5641..10922}
+.\redis-cli.exe -p 7002 cluster addslots {10922..15000} //不知道为什么在加10922..16383时候会报参数过长的错误所以分开两次执行
+.\redis-cli.exe -p 7002 cluster addslots {15001.。16383}
+
+设置从
+
+.\redis-cli.exe -p 8000 cluster replicate 04be716c8739c4b67a2aeae0b16befeefe58af0b 
+...
+
+
+另外一种设置方法
+
+1.先把机器全部起动起来
+2.cluster create 命令  （https://redis.io/topics/cluster-tutorial）
+PS F:\workspace\JavaCourse\tool\Redis-x64-5.0.10> .\redis-cli.exe --cluster create 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:8000 127.0.0.1:8001 127.0.0.1:8002 --cluster-replicas 1
+>>> Performing hash slots allocation on 6 nodes...
+Master[0] -> Slots 0 - 5460
+Master[1] -> Slots 5461 - 10922
+Master[2] -> Slots 10923 - 16383
+Adding replica 127.0.0.1:8001 to 127.0.0.1:7000
+Adding replica 127.0.0.1:8002 to 127.0.0.1:7001
+Adding replica 127.0.0.1:8000 to 127.0.0.1:7002
+>>> Trying to optimize slaves allocation for anti-affinity
+[WARNING] Some slaves are in the same host as their master
+M: 90cf42dddca6edfa89a97ec1dfe71c9d40c89313 127.0.0.1:7000
+   slots:[0-5460] (5461 slots) master
+M: cc4b88dd9ef442a63e203a68c34544908989f479 127.0.0.1:7001
+   slots:[5461-10922] (5462 slots) master
+M: 46316c7703dc7c2a27c0313af9ecdd2f4703b0db 127.0.0.1:7002
+   slots:[10923-16383] (5461 slots) master
+S: 6e5a88a32bfc46475badd7175a0ea444c2d5cb2a 127.0.0.1:8000
+   replicates cc4b88dd9ef442a63e203a68c34544908989f479
+S: 194a041a2e35aa71ca3e50bb2ed887a789f3ef09 127.0.0.1:8001
+   replicates 46316c7703dc7c2a27c0313af9ecdd2f4703b0db
+S: b25ac5cafdb4374c710b8466f03a301bfda53aef 127.0.0.1:8002
+   replicates 90cf42dddca6edfa89a97ec1dfe71c9d40c89313
+Can I set the above configuration? (type 'yes' to accept): yes
+>>> Nodes configuration updated
+>>> Assign a different config epoch to each node
+>>> Sending CLUSTER MEET messages to join the cluster
+Waiting for the cluster to join
+...
+>>> Performing Cluster Check (using node 127.0.0.1:7000)
+M: 90cf42dddca6edfa89a97ec1dfe71c9d40c89313 127.0.0.1:7000
+   slots:[0-5460] (5461 slots) master
+   1 additional replica(s)
+M: cc4b88dd9ef442a63e203a68c34544908989f479 127.0.0.1:7001
+   slots:[5461-10922] (5462 slots) master
+   1 additional replica(s)
+M: 46316c7703dc7c2a27c0313af9ecdd2f4703b0db 127.0.0.1:7002
+   slots:[10923-16383] (5461 slots) master
+   1 additional replica(s)
+S: 194a041a2e35aa71ca3e50bb2ed887a789f3ef09 127.0.0.1:8001
+   slots: (0 slots) slave
+   replicates 46316c7703dc7c2a27c0313af9ecdd2f4703b0db
+S: 6e5a88a32bfc46475badd7175a0ea444c2d5cb2a 127.0.0.1:8000
+   slots: (0 slots) slave
+   replicates cc4b88dd9ef442a63e203a68c34544908989f479
+S: b25ac5cafdb4374c710b8466f03a301bfda53aef 127.0.0.1:8002
+   slots: (0 slots) slave
+   replicates 90cf42dddca6edfa89a97ec1dfe71c9d40c89313
+[OK] All nodes agree about slots configuration.
+>>> Check for open slots...
+>>> Check slots coverage...
+[OK] All 16384 slots covered.
 
 
 
