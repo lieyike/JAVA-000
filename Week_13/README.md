@@ -22,3 +22,8 @@ producer 输入message
 
 consumer会接受到message
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9093,localhost:9094:localhost:9095 --topic test32 --from-beginning
+
+
+
+spring-kafka参考, 还在研究中
+https://www.baeldung.com/spring-kafka
