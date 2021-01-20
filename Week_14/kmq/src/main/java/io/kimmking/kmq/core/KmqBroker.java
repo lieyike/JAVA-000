@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public final class KmqBroker { // Broker+Connection
 
-    public static final int CAPACITY = 10000;
+    public static final int CAPACITY = 502;
 
     private final Map<String, Kmq2> kmqMap = new ConcurrentHashMap<>(64);
 

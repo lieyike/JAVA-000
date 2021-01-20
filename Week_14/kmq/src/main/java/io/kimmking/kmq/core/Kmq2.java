@@ -29,19 +29,18 @@ public final class Kmq2 {
 
     public synchronized boolean send(KmqMessage message) {
         try {
-            if (writeableIndex <= capacity) {
-                queue[writeableIndex] = message;
-                writeableIndex++;
-            } else {
+            if (writeableIndex >= capacity) {
                 KmqMessage[] tmp = new KmqMessage[capacity];
                 int i = 0;
                 for (int j = readableIndex; j < capacity; i++, j++) {
                     tmp[i] = queue[j];
                 }
                 readableIndex = 0;
-                queue[writeableIndex] = message;
-                writeableIndex = i + 1;
+                writeableIndex = i;
+                queue = tmp;
             }
+            queue[writeableIndex] = message;
+            writeableIndex++;
             return true;
         } catch (Exception e) {
             e.printStackTrace();
