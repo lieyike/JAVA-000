@@ -1,6 +1,10 @@
 package io.kimmking.kmq.core;
 
+import java.util.UUID;
+
 public class KmqConsumer<T> {
+
+    private String consumerId;
 
     private final KmqBroker broker;
 
@@ -8,6 +12,7 @@ public class KmqConsumer<T> {
 
     public KmqConsumer(KmqBroker broker) {
         this.broker = broker;
+        this.consumerId = UUID.randomUUID().toString();
     }
 
     public void subscribe(String topic) {
@@ -16,7 +21,7 @@ public class KmqConsumer<T> {
     }
 
     public KmqMessage<T> poll(long timeout) {
-        return kmq.poll(timeout);
+        return kmq.poll(consumerId, timeout);
     }
 
 }

@@ -3,10 +3,7 @@ package io.kimmking.kmq.core;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 public final class Kmq2 {
 
@@ -16,9 +13,11 @@ public final class Kmq2 {
 
     private KmqMessage[] queue;
 
-    private int readableIndex = 0;
+//    private int readableIndex = 0;
 
     private int writeableIndex = 0;
+
+    private ConcurrentHashMap<String, Integer> readableIndexIndexMap = new ConcurrentHashMap<>(); //加了锁目前看可以直接用HashMap
 
     public Kmq2(String topic, int capacity) {
         this.topic = topic;
@@ -32,10 +31,23 @@ public final class Kmq2 {
             if (writeableIndex >= capacity) {
                 KmqMessage[] tmp = new KmqMessage[capacity];
                 int i = 0;
-                for (int j = readableIndex; j < capacity; i++, j++) {
+
+                int smallestReadableIndex = capacity;
+                for (Integer index: readableIndexIndexMap.values()) {
+                    if (smallestReadableIndex > index) {
+                        smallestReadableIndex = index;
+                    }
+                }
+                for (int j = smallestReadableIndex; j < capacity; i++, j++) {
                     tmp[i] = queue[j];
                 }
-                readableIndex = 0;
+
+                final int deviation = smallestReadableIndex;
+                ConcurrentHashMap<String, Integer> tmpMap = new ConcurrentHashMap<>();
+                readableIndexIndexMap.forEach((consumerId, index) -> {
+                    tmpMap.put(consumerId, index - deviation);
+                });
+                readableIndexIndexMap = tmpMap;
                 writeableIndex = i;
                 queue = tmp;
             }
@@ -49,10 +61,11 @@ public final class Kmq2 {
 
     }
 
-    public synchronized KmqMessage poll() {
+    public synchronized KmqMessage poll(String consumerId) {
+        int readableIndex = readableIndexIndexMap.getOrDefault(consumerId, 0);
         if (readableIndex < writeableIndex) {
             KmqMessage message = queue[readableIndex];
-            readableIndex++;
+            readableIndexIndexMap.put(consumerId, readableIndex + 1);
             return message;
         } else {
             return null;
@@ -60,11 +73,11 @@ public final class Kmq2 {
     }
 
     @SneakyThrows
-    public KmqMessage poll(long timeout) {
+    public KmqMessage poll(String consumerId, long timeout) {
         long startTime = System.currentTimeMillis();
         long spendTime = 0;
         while(spendTime < timeout) {
-            KmqMessage message = poll();
+            KmqMessage message = poll(consumerId);
 
             if (message != null) {
                 return message;
