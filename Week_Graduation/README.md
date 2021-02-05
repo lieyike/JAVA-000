@@ -129,3 +129,12 @@
      https://www.cnblogs.com/youngdeng/p/12883790.html
 
 9) 分布式消息队列
+
+    
+    消息开始是队列然后到消息服务
+    消息处理保障一般建议使用At least once然后在应用层去做幂等处理，这样做能确保数据不会丢失。
+    JMS是应用层的API协议是一系列的接口，具体是使用它的实现。
+    第一代MQ ActiveMQ RabbitMQ 提供queue和Topic
+    第二代MQ kafka 和 rocketMQ 相比与第一代提供了堆积的功能。
+    第三代MQ pulsar 分离了计算节点存储节点
+    

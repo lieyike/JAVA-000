@@ -5,8 +5,8 @@ import java.sql.*;
 
 public class JDBCHomeWork {
 
-    private static String jdbcUrl = "jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC";
-    private static String user = "test";
+    private static String jdbcUrl = "jdbc:mysql://127.0.0.1:3307/test?serverTimezone=UTC";
+    private static String user = "root";
     private static String password = "123456";
 
     public static void main(String[] args) {

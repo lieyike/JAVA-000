@@ -1,4 +1,12 @@
 学习笔记
+workflow:   osworkflow, jbpm activity
+工作流的定义， new 一个流程实例
+
+状态机:  FSM spring statemachine
+
+2分钟内能不能写快排
+
+作业笔记
 用数组模拟queue
 writeableIndex 指明可写入的位置
 readableIndex  指明可读取的位置
