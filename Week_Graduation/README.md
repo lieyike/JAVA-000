@@ -133,8 +133,11 @@
     
     消息开始是队列然后到消息服务
     消息处理保障一般建议使用At least once然后在应用层去做幂等处理，这样做能确保数据不会丢失。
+    同一个Topic 或者Queue保证有序，但是做了分区就无法保证整体有序，只能保证分区内有序
     JMS是应用层的API协议是一系列的接口，具体是使用它的实现。
     第一代MQ ActiveMQ RabbitMQ 提供queue和Topic
     第二代MQ kafka 和 rocketMQ 相比与第一代提供了堆积的功能。
     第三代MQ pulsar 分离了计算节点存储节点
+    kafka得注意集群中增加机器或者减少机器时候的rebalance问题。
     
+    rabbitmq的一个核心是添加了一个额exchange中broker中做消息的分发工作
